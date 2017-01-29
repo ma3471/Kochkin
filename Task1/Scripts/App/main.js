@@ -1,9 +1,11 @@
 ﻿; (function () {
-    var prodStorage = [
+    var  DB = $.getJSON("./Scripts/App/productsDB.json"),//, function (data) {alert(data);  })
+    /*[
             { id: 1, name: "Товар 1", count: 5, price: 12352.25 },
             { id: 2, name: "Товар 2", count: 15, price: 12552.25 },
             { id: 3, name: "Товар 3", count: 150, price: 12452.25 }
-        ],
+        ]*/
+        prodStorage = DB.responseJSON.products,
         prodShow = [],
 		formatterUsdCur = new Intl.NumberFormat("en-US", {
 		  style: "currency",
@@ -18,6 +20,7 @@
         dbPrice = document.getElementById("storePrice"),
         inputPropriety = document.getElementById("storePropriety"),
         tbodyDb = document.getElementById("tbodyElem");
+        
 
     function drawDb(prodRow) { // Отрисовывает сведения о товарах.
         tbodyDb.innerHTML = "";
