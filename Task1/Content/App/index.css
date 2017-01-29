@@ -1,6 +1,18 @@
-﻿body {
+﻿span.error-msg {
+    color: #f00;
 }
 
-span#errorMsg {
+span.error-msg + div > div > input:focus {
     color: #f00;
+    border-color: #f00;
+}
+
+span.error-msg + input, span.error-msg + input:focus {
+    color: #f00;
+    border-color: #f00;
+}
+
+div.row.row-above-table {
+    margin-top: 8px;
+    margin-bottom: 8px;
 }

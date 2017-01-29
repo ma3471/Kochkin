@@ -11,7 +11,6 @@
     <script src="Scripts/jquery-3.1.1.min.js"></script>
 </head>
 <body>
-    <br/>
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
@@ -26,9 +25,8 @@
             </div>
         </div>
     </div>
-    <br/>
     <div class="container-fluid">
-        <div class="row">
+        <div class="row row-above-table">
             <div class="col-lg-5">
                 <!--Значение подстроки storeFilter для фильтрации по имени товара, отображения, помещения в хранилище или редактирования.-->
                 <input type="text" class="form-control input-lg" id="storeFilter" placeholder="Фильтр по подстроке с именем товара" value=""/>
@@ -37,7 +35,7 @@
                 <button type="button" class="btn btn-default btn-lg btn-block" id="searchAboveModal">Search</button>
             </div>
             <div class="col-lg-offset-2 col-lg-3">
-                <!--Клавиша добавления над модальным-->
+                <!--Кнопка добавления над модальным-->
                 <button type="button" class="btn btn-primary btn-lg btn-block" id="addAboveModal" data-toggle="modal" data-target="#addModal" data-backdrop="static">Add New</button>
 
                 <!-- Modal Начало модального окна добавления-->
@@ -61,7 +59,7 @@
                                     <div class="container-fluid">
                                         <div class="row">
                                             <div class="col-lg-6">
-                                                <input type="text" class="form-control" id="addName"/>
+                                                <input type="text" class="form-control" id="addName" placeholder="Имя товара" autofocus />
                                             </div>
                                             <div class="col-lg-6">
                                                 <p class="form-control-static">
@@ -82,7 +80,7 @@
                                     <div class="container-fluid">
                                         <div class="row">
                                             <div class="col-lg-3">
-                                                <input type="text" class="form-control" id="addCount"/>
+                                                <input type="text" class="form-control" id="addCount" placeholder="Количество"/>
                                             </div>
                                         </div>
                                     </div>
@@ -98,7 +96,7 @@
                                     <div class="container-fluid">
                                         <div class="row">
                                             <div class="col-lg-6">
-                                                <input type="text" class="form-control" id="addPrice"/>
+                                                <input type="text" class="form-control" id="addPrice" placeholder="Цена товара"/>
                                             </div>
                                         </div>
                                     </div>
@@ -122,7 +120,6 @@
             </div>
         </div>
     </div>
-    <br/>
     <div>
     <table class="table table-bordered">
     <thead>
@@ -134,8 +131,8 @@
                         Name
                     </div>
                     <div class="col-lg-2">
-                        <button type="button" class="close">
-                            <span id="nameToggle" class="glyphicon glyphicon-triangle-top"></span>
+                        <button id="nameToggle" type="button" class="close">
+                            <span class="glyphicon glyphicon-triangle-top"></span>
                         </button>
                     </div>
                 </div>
@@ -148,8 +145,8 @@
                         Price
                     </div>
                     <div class="col-lg-2">
-                        <button type="button" class="close">
-                            <span id="priceToggle" class="glyphicon glyphicon-triangle-top"></span>
+                        <button id="priceToggle" type="button" class="close">
+                            <span class="glyphicon glyphicon-triangle-top"></span>
                         </button>
                     </div>
                 </div>
@@ -166,12 +163,13 @@
         </th>
     </tr>
     </thead>
-    <tbody>
+    <tbody id="tbodyElem">
     </tbody>
     </table>
     </div>
-    <script src="Scripts/App/scripts.js"></script>
-    <script src="Scripts/App/verifyAdd.js"></script>
+    <script src="Scripts/App/main.js"></script>
+    <script src="Scripts/App/verifyFilter.js"></script>
+    <script src="Scripts/App/verifyChange.js"></script>
     <script src="Scripts/bootstrap.min.js"></script>
     <script type="text/template" id="rowBlock">
         <td>
@@ -201,12 +199,13 @@
         <td>
             <div class="container-fluid">
                 <div class="row">
+                    <!--Редактирование товара-->
                     <div class="col-lg-6">
-						<!--Клавиша редактирования над модальным-->
-                        <button type="button" class="btn btn-warning btn-lg btn-block #prodEditModal" data-toggle="modal" data-backdrop="static">Edit</button>
+						<!--Кнопка редактирования над модальным-->
+                        <button type="button" class="btn btn-warning btn-lg btn-block #prodEditStartModal" data-toggle="modal" data-backdrop="static">Edit</button>
 
                         <!-- Modal Начало модального окна редактирования-->
-                        <div class="modal fade prodEditModal" role="dialog">
+                        <div class="modal fade prodEditStartModal" role="dialog">
                             <div class="modal-dialog modal-lg">
 
                                 <!-- Modal content -->
@@ -229,7 +228,7 @@
                                                     <div class="row">
                                                         <div class="col-lg-6">
 															<!--Поле ввода имени товара-->
-                                                            <input type="text" class="form-control prodEditNameId" />
+                                                            <input type="text" class="form-control prodEditNameId" placeholder="Имя товара" />
                                                         </div>
                                                         <div class="col-lg-6">
                                                             <p class="form-control-static">
@@ -252,7 +251,7 @@
                                                     <div class="row">
                                                         <div class="col-lg-3">
 															<!--Поле ввода количества товара-->
-                                                            <input type="text" class="form-control prodEditCountId" />
+                                                            <input type="text" class="form-control prodEditCountId" placeholder="Количество" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -270,7 +269,7 @@
                                                     <div class="row">
                                                         <div class="col-lg-6">
 															<!--Поле ввода цены товара-->
-                                                            <input type="text" class="form-control prodEditPriceId" />
+                                                            <input type="text" class="form-control prodEditPriceId" placeholder="Цена товара" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -281,7 +280,7 @@
                                         <div class="container-fluid">
                                             <div class="row">
                                                 <div class="col-lg-4">
-													<!--Клавиша обновления в модальном-->
+													<!--Кнопка обновления в модальном-->
                                                     <button type="button" class="btn btn-warning btn-lg btn-block prodEditInModal" data-dismiss="modal">Update</button>
                                                 </div>
                                             </div>
@@ -294,12 +293,13 @@
                         <!-- Modal end -->
 
                     </div>
+                    <!--Удаление товара-->
                     <div class="col-lg-6">
-						<!--Клавиша удаления над модальным-->
-                        <button type="button" class="btn btn-danger btn-lg btn-block #prodDropModal" data-toggle="modal" data-backdrop="static">Delete</button>
+						<!--Кнопка удаления над модальным-->
+                        <button type="button" class="btn btn-danger btn-lg btn-block #prodDropStartModal" data-toggle="modal" data-backdrop="static">Delete</button>
 
                         <!-- Modal Начало модального окна удаления-->
-                        <div class="modal fade prodDropModal" role="dialog">
+                        <div class="modal fade prodDropStartModal" role="dialog">
                             <div class="modal-dialog">
 
                                 <!-- Modal content -->
@@ -315,7 +315,7 @@
                                         <div class="container-fluid">
                                             <div class="row">
                                                 <div class="col-lg-offset-1 col-lg-5">
-													<!--Клавиша удаления в модальном-->
+													<!--Кнопка удаления в модальном-->
                                                     <button type="button" class="btn btn-danger btn-lg btn-block prodDropInModal" data-dismiss="modal">Yes</button>
                                                 </div>
                                                 <div class="col-lg-5">
